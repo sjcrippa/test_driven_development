@@ -1,23 +1,5 @@
 import { describe, expect, it } from 'vitest'
-
-/* Escribir una funcion que al pasarle un numero:
-    - Muestre fizz si es multiplo de 3
-    - Muestre bazz si es multiplo de 5
-    - Muestre fizzbuzz si es multiplo de ambos
-    - Muestre el nro si no es multiplo de ninguno */
-
-const fizzbuzz = (number) => {
-  if (typeof number !== 'number') throw new Error('parameter provided must be a number')
-  if (Number.isNaN(number)) throw new Error('parameter provided must be a number')
-
-  if (number % 15 === 0) return 'fizzbuzz' // multiplo de 3 y 5
-
-  if (number % 5 === 0) return 'buzz' // multiplo de 5
-
-  if (number % 3 === 0) return 'fizz' // multiplo de 3
-
-  return number
-}
+import { fizzbuzz } from '../src/fizzbuzz'
 
 describe('fizzbuzz', () => {
   // test de abajo es redundante, asi que se desactiva.
@@ -71,5 +53,9 @@ describe('fizzbuzz', () => {
 
   it('should return "fizzbuzz" if number provided is multiple of 3 and 5', () => {
     expect(fizzbuzz(15)).toBe('fizzbuzz')
+  })
+
+  it('should return "woff" if number provided is 7', () => {
+    expect(fizzbuzz(7)).toBe('woff')
   })
 })
