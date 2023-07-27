@@ -1,5 +1,8 @@
 {
   "devDependencies": {
+    "@testing-library/react": "^14.0.0",
+    "@vitejs/plugin-react": "^4.0.3",
+    "happy-dom": "^10.5.2",
     "standard": "^17.1.0",
     "vitest": "^0.33.0"
   },
@@ -178,6 +181,8 @@
     "prop-types": "^15.8.1",
     "punycode": "^2.3.0",
     "queue-microtask": "^1.2.3",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
     "react-is": "^18.2.0",
     "regexp.prototype.flags": "^1.5.0",
     "regexpp": "^3.2.0",
