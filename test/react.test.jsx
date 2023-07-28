@@ -17,7 +17,7 @@ const equalSign = '='
 const Calculator = () => {
   const [value, setValue] = useState('')
 
-  const createHandleNumber = number => () => setValue(value.concat(number))
+  const createHandleClick = op => () => setValue(value.concat(op))
   // aqui arriba, en el setValue, estamos sobreescribiendo la info constantemente, entonces para resolver el test de los "several numbers" agregamos el metodo concat()
 
   return (
@@ -28,7 +28,7 @@ const Calculator = () => {
         {rows.map((row, idx) => (
           <div key={idx} role='row'>
             {row.map(number =>
-              <button onClick={createHandleNumber(number)} key={number}>
+              <button onClick={createHandleClick(number)} key={number}>
                 {number}
               </button>
             )}
@@ -36,7 +36,7 @@ const Calculator = () => {
         ))}
         {
           operations.map(operation => (
-            <span key={operation}>{operation}</span>
+            <button onClick={createHandleClick(operation)} key={operation}>{operation}</button>
           ))
         }
         <span>{equalSign}</span>
@@ -90,8 +90,9 @@ describe('Calculator', () => {
     screen.getByRole('textbox')
   })
 
-  it('show user input after clicking a number', () => {
+  it('should show user input after clicking a number', () => {
     render(<Calculator />)
+
     const one = screen.getByText('1')
     fireEvent.click(one)
 
@@ -99,7 +100,7 @@ describe('Calculator', () => {
     expect(input.value).toBe('1')
   })
 
-  it('show user input after clicking several numbers', () => {
+  it('should show user input after clicking several numbers', () => {
     render(<Calculator />)
     const one = screen.getByText('1')
     fireEvent.click(one)
@@ -112,5 +113,19 @@ describe('Calculator', () => {
 
     const input = screen.getByRole('textbox')
     expect(input.value).toBe('123')
+  })
+
+  it('should show user input after clicking numbers and operations', () => {
+    render(<Calculator />)
+
+    const one = screen.getByText('1')
+    fireEvent.click(one)
+
+    const plus = screen.getByText('+')
+    fireEvent.click(plus)
+    fireEvent.click(one)
+
+    const input = screen.getByRole('textbox')
+    expect(input.value).toBe('1+1')
   })
 })
